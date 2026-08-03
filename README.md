@@ -9,17 +9,17 @@
 [![Platform](https://img.shields.io/badge/platform-Windows-0078D6)](#download)
 [![Auto-updates](https://img.shields.io/badge/updates-automatic-6f42c1)](#staying-up-to-date)
 
-[Download](#download) · [What it does](#what-it-actually-does) · [FAQ](#faq)
+[Download](#download) · [Getting started](#getting-started) · [Features](#features) · [FAQ](#faq) · [Bugs & feature requests](#bugs--feature-requests)
 
 </div>
 
 ---
 
-## Why this exists
+## What Cherry Spot is
 
-Most Git GUIs are built for "commit, push, pull" and treat everything else — cherry-picking a hotfix across three release branches, resolving a conflict without leaving your editor, remembering which task ID a commit belongs to — as a second-class flow you drop into a terminal for anyway.
+Cherry Spot is a desktop Git client built for one recurring workflow: moving commits between branches — cherry-picking a fix from `dev` up to `staging`, then up to `live`, opening a pull request automatically wherever one's required — without living in a terminal or a browser to get it done.
 
-Cherry Spot flips that. It's built around the workflows that actually eat your time: moving commits between branches, resolving conflicts fast, and keeping history clean — with a terminal-level understanding of what's happening under the hood, but without needing to hold ten `git` flags in your head.
+It exists because most Git GUIs are built for "commit, push, pull" and treat everything else — cherry-picking across branches, resolving a conflict, remembering which task ID a commit belongs to, opening the PR a protected branch demands — as a second-class flow you drop out of the app for anyway. Cherry Spot builds each of those directly into the UI instead.
 
 ## Download
 
@@ -30,9 +30,41 @@ Grab the installer from **[Releases](https://github.com/Ehtasham24/cherrySpot-re
 | `cherry-spot_*_x64-setup.exe` | You want the standard installer (recommended) |
 | `cherry-spot_*_x64_en-US.msi` | You need an MSI (scripted installs, IT-managed machines) |
 
-Windows may show a SmartScreen prompt (see [FAQ](#faq)) — that's expected for a small internal tool, not a red flag.
+Windows may show a SmartScreen prompt on first run — that's expected for a small internal tool without a paid publisher certificate, not a red flag. Click **More info → Run anyway**.
 
-## What it actually does
+## Getting started
+
+### 1. Sign in
+
+Open Cherry Spot and sign in with GitHub or GitLab from the top right. This is a browser-based OAuth flow — no personal access token to generate or paste in. GitLab sign-in also works against self-managed instances, not just gitlab.com.
+
+### 2. Add a repository
+
+Use whichever fits:
+- **Clone** — paste a repo URL.
+- **Browse your repos** — pick one straight from a list of everything your signed-in account has access to.
+- **Open existing** — point Cherry Spot at a repo already on disk.
+
+A "Current repository" dropdown, top left, keeps recently opened repos one click away after that.
+
+### 3. The core workflow
+
+1. **Pick a branch, then search.** Enter a task ID or keyword; results come from the commit history of the current branch, a specific branch, or every branch at once (toggle **All branches**).
+2. **Select commits, choose a target branch (or several), and cherry-pick.** Before anything runs, Cherry Spot shows exactly what's about to happen to each target — a direct commit, or a pull/merge request if that branch requires one.
+3. **Resolve conflicts in place, if any come up.** Use **Accept Current** / **Accept Incoming** for a quick resolution, or **Open in editor** to fix the file yourself and save — Cherry Spot detects the save and continues automatically.
+4. **Push.** One button in the header, always visible. It checks the remote first, so a push that would've been rejected opens a Pull prompt instead of failing outright.
+
+### 4. Where things live
+
+- **Header** — Fetch origin, Pull, Push, **Compare** (diff any two branches), and **Task Status** (check which branches have a given task ID's commits, and which are still missing them).
+- **Settings** (gear icon, top right) — sign-in/account, keyboard shortcuts, theme, Recent Activity, and Branch Rules.
+- **Tray icon + global hotkey** (Ctrl+Shift+F by default, rebindable in Settings) — show or hide the whole app from anywhere, without alt-tabbing to find it.
+
+### Staying up to date
+
+Cherry Spot checks for new versions on startup and shows an **"Update & Restart"** banner when one's available. Download, install, and relaunch happen in one click — no manual reinstall. The download-and-run step above is a one-time thing, for your very first install only.
+
+## Features
 
 <details>
 <summary><b>Cherry-pick commits across branches without the copy-hash-and-pray dance</b></summary>
@@ -41,9 +73,38 @@ Windows may show a SmartScreen prompt (see [FAQ](#faq)) — that's expected for 
 
 The usual way: `git log`, copy a hash, `git checkout target-branch`, `git cherry-pick <hash>`, hit a conflict, resolve it by hand, `git add`, `git cherry-pick --continue`, repeat for every commit.
 
-In Cherry Spot: search or browse to the commits you want (even across branches), select them, pick a target branch, and go. Multiple commits queue and apply in order automatically. Hit a conflict and Cherry Spot shows you exactly which files, with **Accept ours / Accept theirs** one-click resolution or **Open in editor** for anything trickier.
+In Cherry Spot: search or browse to the commits you want (even across branches), select them, pick a target branch, and go. Multiple commits queue and apply in order automatically. Hit a conflict and Cherry Spot shows you exactly which files, with **Accept Current / Accept Incoming** one-click resolution or **Open in editor** for anything trickier.
 
 Resolve it and save the file — Cherry Spot notices on its own and continues the operation. No `git status`, no `--continue`, no forgetting which commit you were mid-pick on.
+
+</details>
+
+<details>
+<summary><b>Send the same fix to several branches — and let Cherry Spot open the PR where one's required</b></summary>
+
+<br>
+
+The usual way: cherry-pick to `staging`, done. Then cherry-pick the *same* commits again for `live` — except `live` needs a reviewed pull request, so that's a second, entirely manual detour: create a branch by hand, cherry-pick onto it, push it, switch to the browser, open the PR, and write the title and description yourself.
+
+In Cherry Spot: pick several target branches at once from the same selection. Branches that don't need review get the commits directly, same as a normal cherry-pick. Branches that do — because your team protects them on GitHub/GitLab, or flagged them in Branch Rules — get a disposable branch cut from that target's freshest `origin`, the same commits cherry-picked onto it, pushed, and a PR or MR opened automatically. You fill in one small dialog first (Fix/Feat/Chore/Task-Ticket, a task ID, a description) so the PR reads like a normal commit instead of an auto-generated placeholder, and one screen shows exactly what's about to happen to every branch before anything runs.
+
+</details>
+
+<details>
+<summary><b>Won't let you accidentally push straight to a protected branch</b></summary>
+
+<br>
+
+Cherry Spot reads your repo's actual GitHub/GitLab branch protection, so if one teammate protects `live`, everyone else sees it protected the moment they open the same repo — nothing to sync by hand. Try to push straight to a branch like that and it stops you before the push even goes out, with a plain explanation instead of a confusing rejection from the remote.
+
+</details>
+
+<details>
+<summary><b>Know exactly which branches have your fix — without asking around</b></summary>
+
+<br>
+
+Enter a task ID and see, at a glance, which branches have all of its commits, some, or none — down to the exact commits still missing on any given branch, with one click to cherry-pick the gap closed. Or compare any two branches directly to see what's actually different between them, grouped by task.
 
 </details>
 
@@ -63,16 +124,16 @@ In Cherry Spot: pick a branch with uncommitted changes still sitting in your wor
 
 <br>
 
-If your team commits against a ticket/task ID format, Cherry Spot enforces it at commit time — with autocomplete from task IDs you've used recently **in that specific repo**, so you're not retyping or copy-pasting IDs between commits on the same piece of work.
+If your team commits against a ticket/task ID format, Cherry Spot enforces it at commit time — pick Fix, Feat, Chore, or Task/Ticket and it builds the message for you (a fully custom template for Task/Ticket commits), with autocomplete from task IDs you've used recently **in that specific repo**, so you're not retyping or copy-pasting IDs between commits on the same piece of work.
 
 </details>
 
 <details>
-<summary><b>Find the commit you're thinking of, fast</b></summary>
+<summary><b>A few extra safety nets for when something needs undoing</b></summary>
 
 <br>
 
-Search by task ID, commit message, author, or a date range — scoped to the current branch or across all of them. No memorizing `git log --grep` syntax or piping through `grep` yourself.
+Amend your last commit's message without leaving the Changes tab, browse any file's full history or see who last touched each line, and — if a reset or rebase went further than intended — browse the reflog and restore to any prior state. All from the same window, no terminal required.
 
 </details>
 
@@ -112,10 +173,6 @@ Four dark levels and four light levels, adjustable split panes, and a layout tha
 
 </details>
 
-## Staying up to date
-
-Cherry Spot checks for new versions on startup and shows an **"Update & Restart"** banner when one's available — download and relaunch happen automatically, no manual reinstall. You only ever do this download-and-run step once, on your very first install.
-
 ## FAQ
 
 **"Windows protected your PC" / SmartScreen warning?**
@@ -124,5 +181,9 @@ Expected — the installer isn't signed with a paid Windows publisher certificat
 **Where's the source code?**
 In a separate, private repository. This repo exists specifically so you can grab a build without needing source access — nothing here except compiled installers and update manifests.
 
-**Something's broken / a feature request?**
-Reach out directly — issues aren't monitored on this repo since it's release-artifacts-only.
+**Do I need to reinstall for every update?**
+No — after the first install, Cherry Spot updates itself in place (see [Staying up to date](#staying-up-to-date)).
+
+## Bugs & feature requests
+
+Found something broken, or want a feature added? [**Open an issue**](https://github.com/Ehtasham24/cherrySpot-releases/issues/new) — include what you were doing, what you expected, and what happened instead (a screenshot helps). Feature requests are just as welcome as bug reports.
