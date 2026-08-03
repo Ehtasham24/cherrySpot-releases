@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="assets/cherry-spot-logo.png" alt="Cherry Spot" width="96" height="96" />
+
 # Cherry Spot
 
 **A desktop Git client built around the one thing most Git GUIs treat as an afterthought: cherry-picking.**
