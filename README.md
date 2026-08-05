@@ -23,6 +23,8 @@ Cherry Spot is a desktop Git client built for one recurring workflow: moving com
 
 It exists because most Git GUIs are built for "commit, push, pull" and treat everything else — cherry-picking across branches, resolving a conflict, remembering which task ID a commit belongs to, opening the PR a protected branch demands — as a second-class flow you drop out of the app for anyway. Cherry Spot builds each of those directly into the UI instead.
 
+**Where it fits:** Cherry Spot isn't trying to be a complete general-purpose Git GUI replacement. Cross-branch cherry-picking, conflict resolution, task-ID search, and PR/MR automation get the deepest attention here; a few things power users expect from a full-featured client — an interactive rebase editor, a dedicated visual 3-way merge tool — aren't built in (yet). Keep a general client around for those if you need them; use Cherry Spot for the workflow it's actually built for.
+
 ## Download
 
 Grab the installer from **[Releases](https://github.com/Ehtasham24/cherrySpot-releases/releases/latest)**:
@@ -51,9 +53,9 @@ A "Current repository" dropdown, top left, keeps recently opened repos one click
 
 ### 3. The core workflow
 
-1. **Pick a branch, then search.** Enter a task ID or keyword; results come from the commit history of the current branch, a specific branch, or every branch at once (toggle **All branches**).
-2. **Select commits, choose a target branch (or several), and cherry-pick.** Before anything runs, Cherry Spot shows exactly what's about to happen to each target — a direct commit, or a pull/merge request if that branch requires one.
-3. **Resolve conflicts in place, if any come up.** Use **Accept Current** / **Accept Incoming** for a quick resolution, or **Open in editor** to fix the file yourself and save — Cherry Spot detects the save and continues automatically.
+1. **Pick a branch, then search.** Enter a task ID, keyword, or paste a commit hash directly; results come from the commit history of the current branch, a specific branch, or every branch at once (toggle **All branches**). Search updates as you type — no Enter needed.
+2. **Select commits, choose a target branch (or several), and cherry-pick.** Before anything runs, Cherry Spot shows exactly what's about to happen to each target — a direct commit, or a pull/merge request if that branch requires one. Prefer to see the shape of a branch's history first? Switch **History** to **Graph** view to see how commits and merges actually connect.
+3. **Resolve conflicts in place, if any come up.** Use **Accept Current** / **Accept Incoming** for a quick resolution, **Keep** / **Delete** when a file was added or removed on one side, or **Open in editor** to fix the file yourself and save — Cherry Spot detects the save and continues automatically.
 4. **Push.** One button in the header, always visible. It checks the remote first, so a push that would've been rejected opens a Pull prompt instead of failing outright.
 
 ### 4. Where things live
@@ -75,7 +77,7 @@ Cherry Spot checks for new versions on startup and shows an **"Update & Restart"
 
 The usual way: `git log`, copy a hash, `git checkout target-branch`, `git cherry-pick <hash>`, hit a conflict, resolve it by hand, `git add`, `git cherry-pick --continue`, repeat for every commit.
 
-In Cherry Spot: search or browse to the commits you want (even across branches), select them, pick a target branch, and go. Multiple commits queue and apply in order automatically. Hit a conflict and Cherry Spot shows you exactly which files, with **Accept Current / Accept Incoming** one-click resolution or **Open in editor** for anything trickier.
+In Cherry Spot: search or browse to the commits you want (even across branches), select them, pick a target branch, and go. Multiple commits queue and apply in order automatically. Hit a conflict and Cherry Spot shows you exactly which files, with **Accept Current / Accept Incoming** one-click resolution (labeled correctly whether it's a cherry-pick, merge, or rebase — "current" and "incoming" don't mean the same thing across all three), **Keep / Delete** for files added or removed on one side, or **Open in editor** for anything trickier.
 
 Resolve it and save the file — Cherry Spot notices on its own and continues the operation. No `git status`, no `--continue`, no forgetting which commit you were mid-pick on.
 
@@ -106,7 +108,25 @@ Cherry Spot reads your repo's actual GitHub/GitLab branch protection, so if one 
 
 <br>
 
-Enter a task ID and see, at a glance, which branches have all of its commits, some, or none — down to the exact commits still missing on any given branch, with one click to cherry-pick the gap closed. Or compare any two branches directly to see what's actually different between them, grouped by task.
+Enter a task ID and see, at a glance, which branches have all of its commits, some, or none — down to the exact commits still missing on any given branch, with one click to cherry-pick the gap closed. Or compare any two branches directly to see what's actually different between them, grouped by task. Diffs show line numbers and are fully selectable, so copying a snippet out doesn't mean opening the file somewhere else first.
+
+</details>
+
+<details>
+<summary><b>See how branches actually diverged, not just a flat list of commits</b></summary>
+
+<br>
+
+Switch the History tab to **Graph** view and get a colored lane graph — the same kind you'd get from the command line's `git log --graph`, without the command line. Forks, merges, and where a branch actually split off are visible at a glance instead of something you reconstruct in your head from hashes and badges. Hover any commit or line for the details behind it, and it stays in lockstep as you scroll through history.
+
+</details>
+
+<details>
+<summary><b>Find a commit by its hash as fast as by its message</b></summary>
+
+<br>
+
+Paste a full or partial commit hash into search and Cherry Spot resolves it directly — no need to know which branch it's on first. Search runs as you type, with no Enter required, so results narrow down live instead of after a keypress-and-wait.
 
 </details>
 
