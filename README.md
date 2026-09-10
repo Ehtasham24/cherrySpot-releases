@@ -63,6 +63,35 @@ Use whichever fits:
 
 A "Current repository" dropdown, top left, keeps recently opened repos one click away after that.
 
+<table>
+<tr>
+<td width="33%">
+
+**Browse your repos**
+No copying URLs — pick straight from everything your signed-in account has access to.
+
+<img src="assets/screenshots/clone-browse-repos.png" alt="Browsing signed-in repositories in the Clone dialog" width="100%" />
+
+</td>
+<td width="33%">
+
+**Filter as you type**
+Typing narrows the list live — useful the moment an org has more than a handful of repos.
+
+<img src="assets/screenshots/clone-search-filter.png" alt="Filtering the repository list by name" width="100%" />
+
+</td>
+<td width="33%">
+
+**Clone, no terminal**
+Pick it and Cherry Spot runs the clone for you, straight to the destination you chose.
+
+<img src="assets/screenshots/clone-in-progress.png" alt="Clone progress dialog" width="100%" />
+
+</td>
+</tr>
+</table>
+
 ### 3. The core workflow
 
 1. **Pick a branch, then search.** Enter a task ID, keyword, or paste a commit hash directly; results come from the commit history of the current branch, a specific branch, or every branch at once (toggle **All branches**). Search updates as you type — no Enter needed.
