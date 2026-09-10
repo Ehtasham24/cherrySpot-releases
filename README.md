@@ -8,7 +8,7 @@
 
 [![Latest release](https://img.shields.io/github/v/release/Ehtasham24/cherrySpot-releases?label=latest&color=2ea44f)](https://github.com/Ehtasham24/cherrySpot-releases/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/Ehtasham24/cherrySpot-releases/total?color=blue)](https://github.com/Ehtasham24/cherrySpot-releases/releases)
-[![Platform](https://img.shields.io/badge/platform-Windows-0078D6)](#download)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-0078D6)](#download)
 [![Auto-updates](https://img.shields.io/badge/updates-automatic-6f42c1)](#staying-up-to-date)
 
 [Download](#download) · [Getting started](#getting-started) · [Features](#features) · [FAQ](#faq) · [Bugs & feature requests](#bugs--feature-requests)
@@ -29,12 +29,24 @@ It exists because most Git GUIs are built for "commit, push, pull" and treat eve
 
 Grab the installer from **[Releases](https://github.com/Ehtasham24/cherrySpot-releases/releases/latest)**:
 
+**Windows**
+
 | File | Use this if… |
 |---|---|
 | `cherry-spot_*_x64-setup.exe` | You want the standard installer (recommended) |
 | `cherry-spot_*_x64_en-US.msi` | You need an MSI (scripted installs, IT-managed machines) |
 
 Windows may show a SmartScreen prompt on first run — that's expected for a small internal tool without a paid publisher certificate, not a red flag. Click **More info → Run anyway**.
+
+**Linux**
+
+| File | Use this if… |
+|---|---|
+| `cherry-spot_*_amd64.deb` | Debian, Ubuntu, or a derivative |
+| `cherry-spot-*.x86_64.rpm` | Fedora, RHEL, or a derivative |
+| `cherry-spot_*_amd64.AppImage` | Any other distro — no install step, just `chmod +x` and run it |
+
+macOS support is in progress — code-signing/notarization setup isn't finished yet, so there's no `.dmg` build here until that's done.
 
 ## Getting started
 
@@ -55,13 +67,13 @@ A "Current repository" dropdown, top left, keeps recently opened repos one click
 
 1. **Pick a branch, then search.** Enter a task ID, keyword, or paste a commit hash directly; results come from the commit history of the current branch, a specific branch, or every branch at once (toggle **All branches**). Search updates as you type — no Enter needed.
 2. **Select commits, choose a target branch (or several), and cherry-pick.** Before anything runs, Cherry Spot shows exactly what's about to happen to each target — a direct commit, or a pull/merge request if that branch requires one. Prefer to see the shape of a branch's history first? Switch **History** to **Graph** view to see how commits and merges actually connect.
-3. **Resolve conflicts in place, if any come up.** Use **Accept Current** / **Accept Incoming** for a quick resolution, **Keep** / **Delete** when a file was added or removed on one side, or **Open in editor** to fix the file yourself and save — Cherry Spot detects the save and continues automatically.
+3. **Resolve conflicts in place, if any come up.** Use **Accept Current** / **Accept Incoming** for a quick resolution, **Accept Both** to keep both sides' content instead of picking one, **Keep** / **Delete** when a file was added or removed on one side, or **Open in editor** to fix the file yourself and save — Cherry Spot detects the save and continues automatically.
 4. **Push.** One button in the header, always visible. It checks the remote first, so a push that would've been rejected opens a Pull prompt instead of failing outright.
 
 ### 4. Where things live
 
 - **Header** — Fetch origin, Pull, Push, **Compare** (diff any two branches), and **Task Status** (check which branches have a given task ID's commits, and which are still missing them).
-- **Settings** (gear icon, top right) — sign-in/account, keyboard shortcuts, theme, Recent Activity, and Branch Rules.
+- **Settings** (gear icon, top right) — sign-in/account, keyboard shortcuts, theme, Recent Activity (your own commit feed across GitHub + GitLab, over a From/To date range you pick), and Branch Rules.
 - **Tray icon + global hotkey** (Ctrl+Shift+F by default, rebindable in Settings) — show or hide the whole app from anywhere, without alt-tabbing to find it.
 
 ### Staying up to date
@@ -77,7 +89,7 @@ Cherry Spot checks for new versions on startup and shows an **"Update & Restart"
 
 The usual way: `git log`, copy a hash, `git checkout target-branch`, `git cherry-pick <hash>`, hit a conflict, resolve it by hand, `git add`, `git cherry-pick --continue`, repeat for every commit.
 
-In Cherry Spot: search or browse to the commits you want (even across branches), select them, pick a target branch, and go. Multiple commits queue and apply in order automatically. Hit a conflict and Cherry Spot shows you exactly which files, with **Accept Current / Accept Incoming** one-click resolution (labeled correctly whether it's a cherry-pick, merge, or rebase — "current" and "incoming" don't mean the same thing across all three), **Keep / Delete** for files added or removed on one side, or **Open in editor** for anything trickier.
+In Cherry Spot: search or browse to the commits you want (even across branches), select them, pick a target branch, and go. Multiple commits queue and apply in order automatically. Hit a conflict and Cherry Spot shows you exactly which files, with **Accept Current / Accept Incoming** one-click resolution (labeled correctly whether it's a cherry-pick, merge, or rebase — "current" and "incoming" don't mean the same thing across all three), **Accept Both** when you actually want both sides' changes kept, **Keep / Delete** for files added or removed on one side, or **Open in editor** for anything trickier.
 
 Resolve it and save the file — Cherry Spot notices on its own and continues the operation. No `git status`, no `--continue`, no forgetting which commit you were mid-pick on.
 
@@ -127,6 +139,26 @@ Switch the History tab to **Graph** view and get a colored lane graph — the sa
 <br>
 
 Paste a full or partial commit hash into search and Cherry Spot resolves it directly — no need to know which branch it's on first. Search runs as you type, with no Enter required, so results narrow down live instead of after a keypress-and-wait.
+
+</details>
+
+<details>
+<summary><b>Migrate a whole module or folder from another branch, not just individual commits</b></summary>
+
+<br>
+
+Sometimes what needs to move isn't "the commits for task #X" — it's a whole module or folder mirrored exactly from another branch (or, over SSH, from a module living on a company server). **Migrate Module** does that: pick the source and the folder, browse its tree visually instead of typing a path, and Cherry Spot adds/updates/deletes files on your current branch to match it exactly — staged for review before anything's committed. Multi-select lets you migrate several modules in one action. A **Repository Type** setting in Settings (Odoo-style module folders vs. a plain conventional repo) tells it how your codebase is actually organized, so the tool matches your project instead of the other way around.
+
+</details>
+
+<details>
+<summary><b>Stash changes without losing track of them</b></summary>
+
+<br>
+
+The usual way: `git stash`, forget what's in it three branches later, `git stash list`, squint at auto-generated messages to figure out which one you need.
+
+In Cherry Spot: a dedicated **Stash** button on the Changes tab opens a GitHub-Desktop-style stash manager — create, apply, pop, or drop stashes, each with a per-file diff preview so you can see what's actually in one before you touch it. If applying or popping hits a conflict, it routes through the same conflict-resolution screen as everything else.
 
 </details>
 
@@ -182,7 +214,7 @@ Real-time ahead/behind counts, one-click push, and pulls that walk you through c
 
 <br>
 
-Sign in with a browser flow for either GitHub or GitLab. No generating a personal access token and pasting it into a text field you'll lose track of.
+Sign in with a browser flow for either GitHub or GitLab. No generating a personal access token and pasting it into a text field you'll lose track of. If something else in your workflow still needs a GitLab personal access token, Settings has a page for that too — see your existing tokens with an expiring-soon warning, and generate a new one via GitLab's own API without leaving the app.
 
 </details>
 
@@ -199,6 +231,9 @@ Four dark levels and four light levels, adjustable split panes, and a layout tha
 
 **"Windows protected your PC" / SmartScreen warning?**
 Expected — the installer isn't signed with a paid Windows publisher certificate (this is an internal tool, not a commercial app). Click **More info → Run anyway**.
+
+**AppImage won't run on Linux?**
+It needs the executable bit set first: `chmod +x cherry-spot_*.AppImage`, then run it directly (`./cherry-spot_*.AppImage`).
 
 **Where's the source code?**
 In a separate, private repository. This repo exists specifically so you can grab a build without needing source access — nothing here except compiled installers and update manifests.
