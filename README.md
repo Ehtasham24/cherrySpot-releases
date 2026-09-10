@@ -163,6 +163,17 @@ Switch the History tab to **Graph** view and get a colored lane graph — the sa
 </details>
 
 <details>
+<summary><b>Narrow results down to one author or one date range, not just scroll</b></summary>
+
+<br>
+
+Turn on Filters and pick a specific teammate from the author dropdown (no need to remember how they spell their name), plus a From/To date range — useful for "what did this person ship last sprint" without scrolling past everyone else's commits. Filters stay set per branch, so switching branches doesn't quietly carry a filter over from somewhere else or reset one you just set.
+
+<img src="assets/screenshots/author-date-filter.png" alt="Author and date range filters applied to the History list" width="80%" />
+
+</details>
+
+<details>
 <summary><b>Find a commit by its hash as fast as by its message</b></summary>
 
 <br>
