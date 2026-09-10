@@ -23,7 +23,7 @@ Cherry Spot is a desktop Git client built for one recurring workflow: moving com
 
 It exists because most Git GUIs are built for "commit, push, pull" and treat everything else — cherry-picking across branches, resolving a conflict, remembering which task ID a commit belongs to, opening the PR a protected branch demands — as a second-class flow you drop out of the app for anyway. Cherry Spot builds each of those directly into the UI instead.
 
-**Where it fits:** Cherry Spot isn't trying to be a complete general-purpose Git GUI replacement. Cross-branch cherry-picking, conflict resolution, task-ID search, and PR/MR automation get the deepest attention here; a few things power users expect from a full-featured client — an interactive rebase editor, a dedicated visual 3-way merge tool — aren't built in (yet). Keep a general client around for those if you need them; use Cherry Spot for the workflow it's actually built for.
+**Where it fits:** Cherry Spot isn't trying to be a complete general-purpose Git GUI replacement — it's built around one recurring workflow: moving commits between branches. Cross-branch cherry-picking, conflict resolution, task-ID search, and PR/MR automation get the deepest attention here, so that workflow stays fast and safe without ever dropping into a terminal.
 
 ## Download
 
