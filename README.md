@@ -13,6 +13,8 @@
 
 [Download](#download) · [Getting started](#getting-started) · [Features](#features) · [FAQ](#faq) · [Bugs & feature requests](#bugs--feature-requests)
 
+<a href="https://raw.githubusercontent.com/Ehtasham24/cherrySpot-releases/main/assets/screenshots/home-screen.png"><img src="assets/screenshots/home-screen.png" alt="Cherry Spot main window" width="85%" /></a>
+
 </div>
 
 ---
@@ -70,7 +72,7 @@ A "Current repository" dropdown, top left, keeps recently opened repos one click
 **Browse your repos**
 No copying URLs — pick straight from everything your signed-in account has access to.
 
-<img src="assets/screenshots/clone-browse-repos.png" alt="Browsing signed-in repositories in the Clone dialog" width="100%" />
+<a href="https://raw.githubusercontent.com/Ehtasham24/cherrySpot-releases/main/assets/screenshots/clone-browse-repos.png"><img src="assets/screenshots/clone-browse-repos.png" alt="Browsing signed-in repositories in the Clone dialog" width="100%" /></a>
 
 </td>
 <td width="33%">
@@ -78,7 +80,7 @@ No copying URLs — pick straight from everything your signed-in account has acc
 **Filter as you type**
 Typing narrows the list live — useful the moment an org has more than a handful of repos.
 
-<img src="assets/screenshots/clone-search-filter.png" alt="Filtering the repository list by name" width="100%" />
+<a href="https://raw.githubusercontent.com/Ehtasham24/cherrySpot-releases/main/assets/screenshots/clone-search-filter.png"><img src="assets/screenshots/clone-search-filter.png" alt="Filtering the repository list by name" width="100%" /></a>
 
 </td>
 <td width="33%">
@@ -86,7 +88,7 @@ Typing narrows the list live — useful the moment an org has more than a handfu
 **Clone, no terminal**
 Pick it and Cherry Spot runs the clone for you, straight to the destination you chose.
 
-<img src="assets/screenshots/clone-in-progress.png" alt="Clone progress dialog" width="100%" />
+<a href="https://raw.githubusercontent.com/Ehtasham24/cherrySpot-releases/main/assets/screenshots/clone-in-progress.png"><img src="assets/screenshots/clone-in-progress.png" alt="Clone progress dialog" width="100%" /></a>
 
 </td>
 </tr>
@@ -169,11 +171,11 @@ Switch the History tab to **Graph** view and get a colored lane graph — the sa
 
 Turn on Filters and pick a specific teammate from the author dropdown (no need to remember how they spell their name), plus a From/To date range — useful for "what did this person ship last sprint" without scrolling past everyone else's commits. Filters stay set per branch, so switching branches doesn't quietly carry a filter over from somewhere else or reset one you just set.
 
-<img src="assets/screenshots/author-date-filter.png" alt="Author and date range filters applied to the History list" width="80%" />
+<a href="https://raw.githubusercontent.com/Ehtasham24/cherrySpot-releases/main/assets/screenshots/author-date-filter.png"><img src="assets/screenshots/author-date-filter.png" alt="Author and date range filters applied to the History list" width="80%" /></a>
 
 The same author filter works with **All branches** toggled on too — narrow straight down to "everything this person shipped, on any branch" in one view, instead of checking branch by branch.
 
-<img src="assets/screenshots/all-branches-author-filter.png" alt="Author filter combined with All branches" width="80%" />
+<a href="https://raw.githubusercontent.com/Ehtasham24/cherrySpot-releases/main/assets/screenshots/all-branches-author-filter.png"><img src="assets/screenshots/all-branches-author-filter.png" alt="Author filter combined with All branches" width="80%" /></a>
 
 </details>
 
@@ -269,7 +271,7 @@ Sign in with a browser flow for either GitHub or GitLab. No generating a persona
 
 Settings → Recent Activity pulls your own commits from GitHub and — if connected — GitLab into one day-by-day feed, split into **Personal Repos** and **Collaborating Repos** so it's clear which is which. Pick your own From/To range instead of being stuck with a fixed lookback window, and jump straight to any day in range with the date tabs.
 
-<img src="assets/screenshots/recent-activity.png" alt="Recent Activity feed with a custom date range" width="85%" />
+<a href="https://raw.githubusercontent.com/Ehtasham24/cherrySpot-releases/main/assets/screenshots/recent-activity.png"><img src="assets/screenshots/recent-activity.png" alt="Recent Activity feed with a custom date range" width="85%" /></a>
 
 </details>
 
