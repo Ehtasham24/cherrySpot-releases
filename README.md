@@ -263,6 +263,17 @@ Sign in with a browser flow for either GitHub or GitLab. No generating a persona
 </details>
 
 <details>
+<summary><b>See what you actually shipped, across every repo and provider, on your own timeline</b></summary>
+
+<br>
+
+Settings → Recent Activity pulls your own commits from GitHub and — if connected — GitLab into one day-by-day feed, split into **Personal Repos** and **Collaborating Repos** so it's clear which is which. Pick your own From/To range instead of being stuck with a fixed lookback window, and jump straight to any day in range with the date tabs.
+
+<img src="assets/screenshots/recent-activity.png" alt="Recent Activity feed with a custom date range" width="85%" />
+
+</details>
+
+<details>
 <summary><b>Built to look at all day</b></summary>
 
 <br>
