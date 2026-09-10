@@ -171,6 +171,10 @@ Turn on Filters and pick a specific teammate from the author dropdown (no need t
 
 <img src="assets/screenshots/author-date-filter.png" alt="Author and date range filters applied to the History list" width="80%" />
 
+The same author filter works with **All branches** toggled on too — narrow straight down to "everything this person shipped, on any branch" in one view, instead of checking branch by branch.
+
+<img src="assets/screenshots/all-branches-author-filter.png" alt="Author filter combined with All branches" width="80%" />
+
 </details>
 
 <details>
