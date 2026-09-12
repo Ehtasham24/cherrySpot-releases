@@ -98,7 +98,7 @@ Pick it and Cherry Spot runs the clone for you, straight to the destination you 
 
 1. **Pick a branch, then search.** Enter a task ID, keyword, or paste a commit hash directly; results come from the commit history of the current branch, a specific branch, or every branch at once (toggle **All branches**). Search updates as you type — no Enter needed.
 2. **Select commits, choose a target branch (or several), and cherry-pick.** Before anything runs, Cherry Spot shows exactly what's about to happen to each target — a direct commit, or a pull/merge request if that branch requires one. Prefer to see the shape of a branch's history first? Switch **History** to **Graph** view to see how commits and merges actually connect.
-3. **Resolve conflicts in place, if any come up.** Use **Accept Current** / **Accept Incoming** for a quick resolution, **Accept Both** to keep both sides' content instead of picking one, **Keep** / **Delete** when a file was added or removed on one side, or **Open in editor** to fix the file yourself and save — Cherry Spot detects the save and continues automatically.
+3. **Resolve conflicts in place, if any come up.** Use **Accept Current** / **Accept Incoming** for a quick resolution, **Accept Both** to keep both sides' content instead of picking one, or click **Resolve in Cherry Spot** to see Current and Incoming laid out side by side — region by region, for files with more than one conflicting spot — before deciding. **Keep** / **Delete** covers a file added or removed on one side, and **Open in editor** stays there for anything trickier — Cherry Spot detects the save and continues automatically either way.
 4. **Push.** One button in the header, always visible. It checks the remote first, so a push that would've been rejected opens a Pull prompt instead of failing outright.
 
 ### 4. Where things live
@@ -123,6 +123,17 @@ The usual way: `git log`, copy a hash, `git checkout target-branch`, `git cherry
 In Cherry Spot: search or browse to the commits you want (even across branches), select them, pick a target branch, and go. Multiple commits queue and apply in order automatically. Hit a conflict and Cherry Spot shows you exactly which files, with **Accept Current / Accept Incoming** one-click resolution (labeled correctly whether it's a cherry-pick, merge, or rebase — "current" and "incoming" don't mean the same thing across all three), **Accept Both** when you actually want both sides' changes kept, **Keep / Delete** for files added or removed on one side, or **Open in editor** for anything trickier.
 
 Resolve it and save the file — Cherry Spot notices on its own and continues the operation. No `git status`, no `--continue`, no forgetting which commit you were mid-pick on.
+
+</details>
+
+<details>
+<summary><b>See exactly what's conflicting, side by side — no external editor required</b></summary>
+
+<br>
+
+The usual way: a conflict hits, you open the file in an editor, and read raw `<<<<<<<` / `=======` / `>>>>>>>` markers to work out what "current" and "incoming" actually are — easy to misread, especially with several conflicting spots in one file.
+
+In Cherry Spot: click **Resolve in Cherry Spot** on any conflicted file and see Current and Incoming laid out side by side, one conflicting region at a time, with the unchanged code around them collapsed out of the way until you ask to see it. Pick **Accept Current**, **Accept Incoming**, **Both** (either order), or **Base** — independently per region, so a file with five separate conflicts doesn't force the same choice on all five. Save once everything's picked and Cherry Spot writes the file back byte-exact, respecting whatever line endings the rest of the file already uses (CRLF stays CRLF, no silent flip to LF).
 
 </details>
 
@@ -233,7 +244,7 @@ If your team commits against a ticket/task ID format, Cherry Spot enforces it at
 
 <br>
 
-Amend your last commit's message without leaving the Changes tab, browse any file's full history or see who last touched each line, and — if a reset or rebase went further than intended — browse the reflog and restore to any prior state. All from the same window, no terminal required.
+Amend your last commit's message without leaving the Changes tab, browse any file's full history or see who last touched each line, and — if a reset or rebase went further than intended — browse the reflog and restore to any prior state. Before restoring anything, open an entry to see exactly which files it touched, with a wider-than-usual diff (more surrounding code than Cherry Spot shows elsewhere) so you can actually judge whether it's worth bringing back, not just guess from a commit message. All from the same window, no terminal required.
 
 </details>
 
@@ -251,7 +262,7 @@ You're heads-down in your editor, made a fix, and want to commit + push without 
 
 <br>
 
-Real-time ahead/behind counts, one-click push, and pulls that walk you through conflicts the same way cherry-picks do — resolve in your editor, save, and Cherry Spot picks up the resolution automatically instead of leaving half your files in "Changes" and half in history.
+Real-time ahead/behind counts, one-click push, and pulls that walk you through conflicts the same way cherry-picks do — resolve side by side in Cherry Spot or in your own editor, save, and Cherry Spot picks up the resolution automatically instead of leaving half your files in "Changes" and half in history.
 
 </details>
 
