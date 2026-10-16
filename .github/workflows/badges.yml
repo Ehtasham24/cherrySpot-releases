@@ -1,0 +1,45 @@
+name: Badges
+
+# shields.io's own github/* badges query GitHub through a shared token pool
+# that fails intermittently ("Unable to select next GitHub token from pool",
+# "invalid"), so the README's latest/downloads badges instead read these
+# JSON files through shields' endpoint badge, which never touches that pool.
+on:
+  release:
+    types: [published, edited, deleted]
+  schedule:
+    - cron: "0 */6 * * *"
+  push:
+    branches: [main]
+    paths: [.github/workflows/badges.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  badges:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Compute badge data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p out
+          # --paginate applies --jq per page, so each page prints its own subtotal.
+          total=$(gh api --paginate "repos/${{ github.repository }}/releases?per_page=100" \
+            --jq '[.[].assets[].download_count] | add // 0' | awk '{s += $1} END {print s + 0}')
+          latest=$(gh api "repos/${{ github.repository }}/releases/latest" --jq .tag_name)
+          jq -n --arg m "$total" '{schemaVersion: 1, label: "downloads", message: $m, color: "blue"}' > out/downloads.json
+          jq -n --arg m "$latest" '{schemaVersion: 1, label: "latest", message: $m, color: "2ea44f"}' > out/latest.json
+          cat out/*.json
+
+      - name: Publish to badges branch
+        run: |
+          cd out
+          git init -q -b badges
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -qm "Update badge data"
+          git push -fq "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" badges
