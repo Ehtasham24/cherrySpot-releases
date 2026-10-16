@@ -27,8 +27,17 @@ jobs:
         run: |
           mkdir -p out
           # --paginate applies --jq per page, so each page prints its own subtotal.
+          # Formatted the way shields' own badges show counts (1512 -> 1.5k).
           total=$(gh api --paginate "repos/${{ github.repository }}/releases?per_page=100" \
-            --jq '[.[].assets[].download_count] | add // 0' | awk '{s += $1} END {print s + 0}')
+            --jq '[.[].assets[].download_count] | add // 0' | awk '
+              function metric(n,   l, p, s, d) {
+                if (n < 1000) return n
+                if (n < 1000000) { l = 1000; p = "k" } else { l = 1000000; p = "M" }
+                s = n / l; d = int(s * 10 + 0.5)
+                if (s < 10 && d % 10 != 0) return sprintf("%.1f%s", d / 10, p)
+                return int(s + 0.5) p
+              }
+              { s += $1 } END { print metric(s + 0) }')
           latest=$(gh api "repos/${{ github.repository }}/releases/latest" --jq .tag_name)
           jq -n --arg m "$total" '{schemaVersion: 1, label: "downloads", message: $m, color: "blue"}' > out/downloads.json
           jq -n --arg m "$latest" '{schemaVersion: 1, label: "latest", message: $m, color: "2ea44f"}' > out/latest.json
