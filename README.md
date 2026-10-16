@@ -6,8 +6,8 @@
 
 **A desktop Git client built around the one thing most Git GUIs treat as an afterthought: cherry-picking.**
 
-[![Latest release](https://img.shields.io/github/v/release/Ehtasham24/cherrySpot-releases?label=latest&color=2ea44f)](https://github.com/Ehtasham24/cherrySpot-releases/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/Ehtasham24/cherrySpot-releases/total?color=blue)](https://github.com/Ehtasham24/cherrySpot-releases/releases)
+[![Latest release](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FEhtasham24%2FcherrySpot-releases%2Fbadges%2Flatest.json)](https://github.com/Ehtasham24/cherrySpot-releases/releases/latest)
+[![Downloads](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FEhtasham24%2FcherrySpot-releases%2Fbadges%2Fdownloads.json)](https://github.com/Ehtasham24/cherrySpot-releases/releases)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-0078D6)](#download)
 [![Auto-updates](https://img.shields.io/badge/updates-automatic-6f42c1)](#staying-up-to-date)
 
